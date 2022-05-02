@@ -24,11 +24,11 @@ ACTOR JohnNegativeOne : DoomPlayer
     	if (user_init_fucannon != 1)
 	{
 		user_fucannon_count = 0;
-		user_init_fucannon = 0;
+		user_init_fucannon = 1;
 	}
     }
     NPLY A -1
-    Loop
+    Goto Spawn+1
   See:
     NPLY ABCD 4 
     Loop
@@ -471,6 +471,7 @@ ACTOR NegativeOneUnmakyr : DoomWeapon
 	{} return state("FUCannon_Fire");
 }
     NBFG B 10 A_FireCustomMissile("NegativeOneUnmakyrBall", 0, 1)
+    ReturnFromFire:
     NBFG B 20 A_ReFire
     Goto Ready
   FUCannon_Fire:
@@ -483,7 +484,8 @@ ACTOR NegativeOneUnmakyr : DoomWeapon
 	else
 	{
 		user_fucannon_count = 0;
-	
+	} return A_Jump(256, "ReturnFromFire");
+       }
 	
   Flash:
     NBFG D 11 Bright A_Light1
