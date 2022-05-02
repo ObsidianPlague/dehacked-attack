@@ -15,10 +15,18 @@ ACTOR JohnNegativeOne : DoomPlayer
   Player.WeaponSlot 6, NegativeOneDarkSceptre
   Player.WeaponSlot 7, NegativeOneUnmakyr
   var int user_fucannon_count;
+  var int user_init_fucannon;
 */
   States
   {
   Spawn:
+    TNT1 A 0 NoDelay {
+    	if (user_init_fucannon != 1)
+	{
+		user_fucannon_count = 0;
+		user_init_fucannon = 0;
+	}
+    }
     NPLY A -1
     Loop
   See:
@@ -466,7 +474,16 @@ ACTOR NegativeOneUnmakyr : DoomWeapon
     NBFG B 20 A_ReFire
     Goto Ready
   FUCannon_Fire:
-  	NBFG B 1 {
+  	NBFG B 1 { 
+	if (user_fucannon_count != 40)
+	{
+		A_FireOldBFG;
+		user_fucannon_count++;
+	}
+	else
+	{
+		user_fucannon_count = 0;
+	
 	
   Flash:
     NBFG D 11 Bright A_Light1
