@@ -14,6 +14,7 @@ ACTOR JohnNegativeOne : DoomPlayer
   Player.WeaponSlot 5, NegativeOneRocketLauncher
   Player.WeaponSlot 6, NegativeOneDarkSceptre
   Player.WeaponSlot 7, NegativeOneUnmakyr
+  var int user_fucannon_count;
 */
   States
   {
@@ -456,10 +457,17 @@ ACTOR NegativeOneUnmakyr : DoomWeapon
     Loop
   Fire:
     NBFG A 20 A_PlaySound("negativeone/bfgf")
-    NBFG B 10 A_GunFlash
+    NBFG B 10 {
+    	A_GunFlash;
+    	if (GetCvar("deh_def_oldnegonebfg"))
+	{} return state("FUCannon_Fire");
+}
     NBFG B 10 A_FireCustomMissile("NegativeOneUnmakyrBall", 0, 1)
     NBFG B 20 A_ReFire
     Goto Ready
+  FUCannon_Fire:
+  	NBFG B 1 {
+	
   Flash:
     NBFG D 11 Bright A_Light1
     NBFG E 6 Bright A_Light2
