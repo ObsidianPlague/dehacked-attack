@@ -99,4 +99,7 @@ OptionMenu "DehackedDefenseOptions"
 	Option "Invulnerability:", "deh_def_invulnstart", "DehackedDefenseStartingWeapon"
 	Option "Partial Invisibility:", "deh_def_invisstart", "DehackedDefenseStartingWeapon"
 	StaticText ""
+	StaticText "-1 DX/Scrapped Modes", 1
+	StaticText "Scrapped during development of -1 with the switch of DEHEXTRA to Boom."
+	Option "F.U. Cannon Mode:", "deh_def_oldnegonebfg", "DehackedDefenseWeaponSelection"
 }
